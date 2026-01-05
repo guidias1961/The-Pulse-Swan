@@ -245,13 +245,14 @@
                 max-width: 350px; 
             }
 
-            /* --- CORREÇÃO DO TÍTULO SWAN NO MOBILE --- */
+            /* --- CORREÇÃO DO TÍTULO SWAN NO MOBILE (FIXED) --- */
             .glitch-title {
-                /* Uso clamp para garantir que caiba em telas pequenas mas cresça em tablets */
-                font-size: clamp(3.5rem, 15vw, 6rem); 
-                /* Aumento ligeiro na altura da linha para evitar cortes no efeito glitch */
-                line-height: 1; 
-                margin-top: 10px;
+                /* Tamanho ajustado e white-space para evitar quebras */
+                font-size: clamp(3rem, 14vw, 5.5rem);
+                /* Line-height mais apertado (similar ao desktop) para garantir alinhamento do efeito */
+                line-height: 0.85;
+                margin-top: 15px;
+                white-space: nowrap;
             }
 
             /* Nav Floater Reset */
