@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
+        /* --- VARIÁVEIS E GERAL (DESKTOP FIRST) --- */
         :root {
             --p-purple: #A020F0;
             --p-dark-purple: #4b0082;
@@ -32,7 +33,6 @@
             background-attachment: fixed;
         }
 
-        /* Efeito de Grão (Caos Téxtil) */
         body::before {
             content: "";
             position: fixed;
@@ -43,15 +43,13 @@
             z-index: 9999;
         }
 
-        /* Tipografia Brutalista */
         h1, h2, h3 { font-family: 'Syne', sans-serif; text-transform: uppercase; }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--p-black); }
         ::-webkit-scrollbar-thumb { background: var(--p-purple); }
 
-        /* HERO - O Impacto Inicial */
+        /* --- HERO DESKTOP --- */
         .hero {
             height: 110vh;
             display: flex;
@@ -100,7 +98,6 @@
             clip-path: inset(45% 0 0 0);
         }
 
-        /* SEÇÃO DE BOTÕES - FLOATERS */
         .nav-floater {
             position: absolute;
             bottom: 10%;
@@ -108,6 +105,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            z-index: 10; /* Garante que fique acima de outros elementos se necessário */
         }
 
         .btn-img {
@@ -121,7 +119,7 @@
             transform: scale(1.1) translateX(-10px);
         }
 
-        /* LAYOUT SOBREPOSTO (AS CINZAS) */
+        /* --- SEÇÕES DESKTOP --- */
         .ashes-section {
             padding: 150px 5%;
             display: grid;
@@ -148,7 +146,6 @@
 
         .ashes-image:hover { filter: none; }
 
-        /* THE CORONATION - FULL SCREEN CULT */
         .coronation {
             padding: 100px 0;
             text-align: center;
@@ -162,7 +159,6 @@
             mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
         }
 
-        /* MUSEUM - STAGGERED GRID (MASONRY-ISH) */
         .museum {
             padding: 100px 5%;
             column-count: 2;
@@ -177,6 +173,7 @@
             background: #111;
             padding: 10px;
             transition: 0.3s;
+            break-inside: avoid; /* Evita quebrar o item no meio da coluna */
         }
 
         .museum-item:hover {
@@ -184,9 +181,8 @@
             transform: translateY(-10px);
         }
 
-        .museum-item img { width: 100%; }
+        .museum-item img { width: 100%; display: block; }
 
-        /* TOKENOMICS - THE PRADA CARD */
         .tokenomics {
             padding: 100px 5%;
             display: flex;
@@ -214,7 +210,6 @@
 
         .prada-card h3 { color: var(--p-purple); margin-bottom: 20px; }
 
-        /* FOOTER BRUTALISTA */
         footer {
             padding: 100px 5%;
             border-top: 1px solid #222;
@@ -229,11 +224,87 @@
         .social-links a { color: var(--p-silver); margin-left: 20px; text-decoration: none; }
         .social-links a:hover { color: var(--p-purple); }
 
+
+        /* --- MOBILE / TABLET RESPONSIVE FIXES --- */
+        /* Estas regras só se aplicam quando a tela for menor que 1024px */
         @media (max-width: 1024px) {
+            
+            /* Hero Adjustments */
+            .hero {
+                height: auto; /* Remove altura fixa */
+                min-height: 90vh;
+                padding: 80px 20px;
+                flex-direction: column;
+            }
+
+            .hero-content {
+                margin-bottom: 40px;
+            }
+
+            .main-logo {
+                width: 80%; /* Largura responsiva */
+                max-width: 350px; /* Limite máximo */
+            }
+
+            .glitch-title {
+                font-size: 4.5rem; /* Título menor no mobile */
+            }
+
+            /* Nav Floater Reset (O mais importante) */
+            .nav-floater {
+                position: relative; /* Deixa de flutuar */
+                bottom: auto;
+                right: auto;
+                flex-direction: row; /* Botões lado a lado */
+                justify-content: center;
+                flex-wrap: wrap;
+                width: 100%;
+                margin-top: 30px;
+            }
+
+            .btn-img {
+                width: 160px; /* Botões um pouco menores */
+            }
+
+            /* Sections Padding Adjustments */
+            .ashes-section, .museum, .tokenomics, footer, .coronation {
+                padding: 60px 5%; /* Reduz paddings gigantes */
+            }
+
+            /* Ashes Section Stacking */
             .ashes-section { display: block; }
-            .ashes-text { padding: 30px; margin-bottom: -50px; position: relative; }
+            .ashes-text { 
+                padding: 30px; 
+                margin-bottom: -30px; /* Menos sobreposição no mobile para leitura */
+                position: relative; 
+            }
+
+            /* Museum Grid to Single Column */
             .museum { column-count: 1; }
-            .glitch-title { font-size: 5rem; }
+
+            /* Tokenomics Cards Full Width */
+            .tokenomics { gap: 20px; }
+            .prada-card {
+                width: 100%; /* Cartão ocupa toda a largura */
+                max-width: 450px; /* Mas não fica gigante em tablets */
+            }
+
+            /* Footer Stacking */
+            footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .social-links {
+                margin-top: 10px;
+            }
+            
+            .social-links a {
+                margin: 0 10px; /* Espaçamento horizontal entre links */
+                display: inline-block;
+            }
         }
     </style>
 </head>
