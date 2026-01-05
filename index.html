@@ -5,251 +5,330 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE PULSE SWAN | Born in the Ashes</title>
     <link rel="icon" href="logo.png" type="image/png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root {
-            --pulse-purple: #A020F0;
-            --blood-red: #8B0000;
-            --prada-silver: #E0E0E0;
-            --chaos-black: #050505;
+            --p-purple: #A020F0;
+            --p-dark-purple: #4b0082;
+            --p-red: #ff0033;
+            --p-silver: #f4f4f4;
+            --p-black: #080808;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
 
         body {
-            background-color: var(--chaos-black);
-            color: white;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--p-black);
+            color: var(--p-silver);
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(160, 32, 240, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 51, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
         }
 
-        /* Hero Section */
+        /* Efeito de Grão (Caos Téxtil) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Tipografia Brutalista */
+        h1, h2, h3 { font-family: 'Syne', sans-serif; text-transform: uppercase; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--p-black); }
+        ::-webkit-scrollbar-thumb { background: var(--p-purple); }
+
+        /* HERO - O Impacto Inicial */
         .hero {
-            height: 100vh;
+            height: 110vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative;
+            padding: 40px;
+        }
+
+        .hero-content {
+            z-index: 2;
             text-align: center;
-            background: radial-gradient(circle, rgba(160, 32, 240, 0.1) 0%, rgba(0,0,0,1) 70%);
-            padding: 20px;
+        }
+
+        .main-logo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: -50px;
         }
 
         .main-logo {
-            width: 350px;
-            max-width: 80%;
-            border-radius: 50%;
-            box-shadow: 0 0 50px var(--pulse-purple);
-            margin-bottom: 30px;
-            border: 4px solid white;
+            width: 400px;
+            filter: drop-shadow(0 0 30px rgba(160, 32, 240, 0.4));
+            animation: float 6s ease-in-out infinite;
         }
 
-        h1 {
-            font-size: 4rem;
-            letter-spacing: -2px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
         }
 
-        .tagline {
-            font-size: 1.5rem;
-            color: var(--pulse-purple);
-            font-weight: bold;
-            margin-bottom: 40px;
+        .glitch-title {
+            font-size: clamp(4rem, 15vw, 12rem);
+            line-height: 0.8;
+            margin-top: 20px;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--p-silver);
+            position: relative;
         }
 
-        .hero-btns {
+        .glitch-title::after {
+            content: "SWAN";
+            position: absolute;
+            left: 0; top: 0;
+            color: var(--p-silver);
+            clip-path: inset(45% 0 0 0);
+        }
+
+        /* SEÇÃO DE BOTÕES - FLOATERS */
+        .nav-floater {
+            position: absolute;
+            bottom: 10%;
+            right: 5%;
             display: flex;
+            flex-direction: column;
             gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
         }
 
-        .hero-btns img {
-            height: 80px;
-            transition: transform 0.3s;
-            cursor: pointer;
+        .btn-img {
+            width: 220px;
+            filter: grayscale(1) contrast(1.2);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .hero-btns img:hover {
-            transform: scale(1.1) rotate(-2deg);
+        .btn-img:hover {
+            filter: grayscale(0) drop-shadow(0 0 15px var(--p-purple));
+            transform: scale(1.1) translateX(-10px);
         }
 
-        /* Narrative Section */
-        .section {
-            padding: 80px 10%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .about-grid {
+        /* LAYOUT SOBREPOSTO (AS CINZAS) */
+        .ashes-section {
+            padding: 150px 5%;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            grid-template-columns: repeat(12, 1fr);
             align-items: center;
         }
 
-        .about-image {
-            width: 100%;
-            border: 2px solid var(--pulse-purple);
-            box-shadow: 10px 10px 0px var(--blood-red);
-        }
-
-        .content h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--prada-silver);
-        }
-
-        /* The Prophecy / Lion King Section */
-        .prophecy {
-            background-color: #111;
-            text-align: center;
-            padding: 100px 5%;
-        }
-
-        .prophecy img {
-            width: 100%;
-            max-width: 900px;
-            margin-top: 40px;
-            border: 5px solid white;
-        }
-
-        /* Meme Gallery */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 50px 0;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #333;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* How to Buy */
-        .buy-card {
-            background: #151515;
-            padding: 40px;
-            border-left: 10px solid var(--pulse-purple);
-            margin-bottom: 20px;
-        }
-
-        .buy-card h3 {
-            color: var(--pulse-purple);
-            margin-bottom: 10px;
-        }
-
-        footer {
-            text-align: center;
+        .ashes-text {
+            grid-column: 2 / 7;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
             padding: 60px;
-            border-top: 1px solid #222;
-            font-size: 0.9rem;
-            color: #555;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 3;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .about-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 2.5rem; }
+        .ashes-image {
+            grid-column: 6 / 12;
+            width: 100%;
+            border: 1px solid var(--p-purple);
+            filter: sepia(1) hue-rotate(250deg) brightness(0.8);
+            transition: 0.5s;
+        }
+
+        .ashes-image:hover { filter: none; }
+
+        /* THE CORONATION - FULL SCREEN CULT */
+        .coronation {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(to bottom, transparent, #111, transparent);
+        }
+
+        .coronation img {
+            width: 100%;
+            max-width: 1100px;
+            margin: 50px 0;
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+
+        /* MUSEUM - STAGGERED GRID (MASONRY-ISH) */
+        .museum {
+            padding: 100px 5%;
+            column-count: 2;
+            column-gap: 30px;
+        }
+
+        .museum-item {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 30px;
+            border: 1px solid #222;
+            background: #111;
+            padding: 10px;
+            transition: 0.3s;
+        }
+
+        .museum-item:hover {
+            border-color: var(--p-purple);
+            transform: translateY(-10px);
+        }
+
+        .museum-item img { width: 100%; }
+
+        /* TOKENOMICS - THE PRADA CARD */
+        .tokenomics {
+            padding: 100px 5%;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .prada-card {
+            width: 350px;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            background: linear-gradient(135deg, #111, #050505);
+        }
+
+        .prada-card::before {
+            content: "PRADA";
+            position: absolute;
+            top: 10px; right: 10px;
+            font-size: 0.6rem;
+            opacity: 0.3;
+            letter-spacing: 5px;
+        }
+
+        .prada-card h3 { color: var(--p-purple); margin-bottom: 20px; }
+
+        /* FOOTER BRUTALISTA */
+        footer {
+            padding: 100px 5%;
+            border-top: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .social-links a { color: var(--p-silver); margin-left: 20px; text-decoration: none; }
+        .social-links a:hover { color: var(--p-purple); }
+
+        @media (max-width: 1024px) {
+            .ashes-section { display: block; }
+            .ashes-text { padding: 30px; margin-bottom: -50px; position: relative; }
+            .museum { column-count: 1; }
+            .glitch-title { font-size: 5rem; }
         }
     </style>
 </head>
 <body>
 
-    <header class="hero">
-        <img src="logo.png" alt="The Pulse Swan Logo" class="main-logo">
-        <h1>THE PULSE SWAN</h1>
-        <p class="tagline">The Antifragile Leader of PulseChain</p>
-        
-        <div class="hero-btns">
-            <a href="#"><img src="buybutton.png" alt="Buy $SWAN"></a>
-            <a href="#"><img src="xbutton.png" alt="Witness the Chaos"></a>
-        </div>
-    </header>
-
-    <section class="section">
-        <div class="about-grid">
-            <div class="content">
-                <h2>Born in the Ashes</h2>
-                <p>While others seek the moon, the Swan thrives in the ruins. $SWAN is not just a token; it is the statistical outlier that the models failed to predict. Born in the 99% drawdown of the old world, we are the refined steel left behind.</p>
-                <p style="margin-top: 20px;"><strong>Stop being a turkey. Embrace the Chaos.</strong></p>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="main-logo-container">
+                <img src="logo.png" alt="THE PULSE SWAN" class="main-logo">
             </div>
-            <img src="meme4.png" alt="Crying vs Sophisticated" class="about-image">
+            <h1 class="glitch-title">SWAN</h1>
+            <p style="letter-spacing: 10px; opacity: 0.6;">THE BLACK SWAN EVENT IS PULSING</p>
+        </div>
+
+        <div class="nav-floater">
+            <a href="#"><img src="buybutton.png" alt="BUY" class="btn-img"></a>
+            <a href="#"><img src="xbutton.png" alt="X" class="btn-img"></a>
         </div>
     </section>
 
-    <section class="prophecy">
-        <div class="section">
-            <h2>The Coronation</h2>
-            <p>Raised by the gods of decentralization, destined to rule the chain of the people.</p>
-            <img src="meme5.png" alt="Richard Heart lifting $SWAN">
+    <section class="ashes-section">
+        <div class="ashes-text">
+            <h2>Born in the Ashes</h2>
+            <p style="margin-top: 20px; font-weight: 300; letter-spacing: 1px;">
+                While the turkeys were being fed by the exit liquidity of VCs, we were observing. PulseChain wasn't a mistake; it was a filtration process. 
+                <br><br>
+                $SWAN is the elite output of that collapse. We are the refined steel left after the fire has consumed the fragile.
+            </p>
+            <div style="margin-top: 30px; height: 1px; width: 100px; background: var(--p-purple);"></div>
+        </div>
+        <img src="meme4.png" alt="Ascension" class="ashes-image">
+    </section>
+
+    <section class="coronation">
+        <h2>The Coronation</h2>
+        <p style="opacity: 0.5; margin-top: 10px;">The Oracle of the Chain raises the Unpredictable.</p>
+        <img src="meme5.png" alt="The Prophecy">
+    </section>
+
+    <section class="museum">
+        <div class="museum-item">
+            <img src="meme1.png" alt="Laws">
+            <p style="font-size: 0.6rem; padding: 10px;">REF 001: LAWS OF THE UNIVERSE</p>
+        </div>
+        <div class="museum-item">
+            <img src="meme6.png" alt="Reaction">
+            <p style="font-size: 0.6rem; padding: 10px;">REF 002: BIOLOGICAL REACTION</p>
+        </div>
+        <div class="museum-item">
+            <img src="meme3.png" alt="Based">
+            <p style="font-size: 0.6rem; padding: 10px;">REF 003: DUALITY OF BASED</p>
+        </div>
+        <div class="museum-item">
+            <img src="meme7.png" alt="Great">
+            <p style="font-size: 0.6rem; padding: 10px;">REF 004: SYSTEM RESET</p>
+        </div>
+        <div class="museum-item">
+            <img src="meme2.png" alt="Cloud">
+            <p style="font-size: 0.6rem; padding: 10px;">REF 005: THE CLOUD ASCENSION</p>
+        </div>
+        <div class="museum-item">
+            <img src="meme8.png" alt="House">
+            <p style="font-size: 0.6rem; padding: 10px;">REF 006: THE SWAN BUDGET</p>
         </div>
     </section>
 
-    <section class="section">
-        <div class="about-grid">
-            <img src="meme8.png" alt="House Hunters $Swan" class="about-image">
-            <div class="content">
-                <h2>Darwinist Tokenomics</h2>
-                <div class="buy-card">
-                    <h3>0% Tax</h3>
-                    <p>The pure survive. The weak are filtered by the market itself.</p>
-                </div>
-                <div class="buy-card">
-                    <h3>Liquidity Burned</h3>
-                    <p>Locked in the ether of PulseChain forever.</p>
-                </div>
-            </div>
+    <section class="tokenomics">
+        <div class="prada-card">
+            <h3>ANTIFRAGILE</h3>
+            <p>0% BUY TAX. <br>0% SELL TAX.</p>
+            <p style="font-size: 0.7rem; margin-top: 20px; opacity: 0.6;">Nature does not tax the survivor.</p>
         </div>
-    </section>
-
-    <section class="section">
-        <h2 style="text-align: center; margin-bottom: 50px;">The Museum of Chaos</h2>
-        <div class="gallery">
-            <div class="gallery-item"><img src="meme1.png" alt="Swan Law of Universe"></div>
-            <div class="gallery-item"><img src="meme2.png" alt="Swan Clouds"></div>
-            <div class="gallery-item"><img src="meme3.png" alt="Two Swans Based"></div>
-            <div class="gallery-item"><img src="meme6.png" alt="Swan quadrant"></div>
-            <div class="gallery-item"><img src="meme7.png" alt="Make Memecoins Great Again"></div>
+        <div class="prada-card">
+            <h3>PURIFIED</h3>
+            <p>LIQUIDITY BURNED. <br>CONTRACT RENOUNCED.</p>
+            <p style="font-size: 0.7rem; margin-top: 20px; opacity: 0.6;">No gods, no masters. Just code.</p>
         </div>
-    </section>
-
-    <section class="section">
-        <h2 style="text-align: center;">How to Buy $SWAN</h2>
-        <div style="margin-top: 40px;">
-            <div class="buy-card">
-                <h3>1. Bridge to PulseChain</h3>
-                <p>Use the PulseBridge to move your assets into the land of the chosen.</p>
-            </div>
-            <div class="buy-card">
-                <h3>2. Swap for $SWAN</h3>
-                <p>Go to PulseX or 9mm and swap your PLS for the Antifragile Swan.</p>
-            </div>
-            <div class="buy-card">
-                <h3>3. Ascend</h3>
-                <p>Watch the turkeys panic while you sit in your Prada suit.</p>
-            </div>
+        <div class="prada-card">
+            <h3>ELITE</h3>
+            <p>PULSECHAIN NATIVE. <br>BORN IN 2026.</p>
+            <p style="font-size: 0.7rem; margin-top: 20px; opacity: 0.6;">The bootloader of the new financial gentry.</p>
         </div>
     </section>
 
     <footer>
-        <p>$SWAN has no association with Prada S.A. It is a meme coin for the PulseChain community.</p>
-        <p>© 2026 THE PULSE SWAN - THE BLACK SWAN EVENT IS HERE.</p>
+        <div>
+            <p>$SWAN - THE PULSE SWAN</p>
+            <p style="opacity: 0.4;">EST. 2026 | BORN IN THE ASHES</p>
+        </div>
+        <div class="social-links">
+            <a href="#">DEXTOOLS</a>
+            <a href="#">PULSEX</a>
+            <a href="#">TELEGRAM</a>
+            <a href="#">X / TWITTER</a>
+        </div>
     </footer>
 
 </body>
