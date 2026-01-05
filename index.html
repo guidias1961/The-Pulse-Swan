@@ -226,12 +226,11 @@
 
 
         /* --- MOBILE / TABLET RESPONSIVE FIXES --- */
-        /* Estas regras só se aplicam quando a tela for menor que 1024px */
         @media (max-width: 1024px) {
             
             /* Hero Adjustments */
             .hero {
-                height: auto; /* Remove altura fixa */
+                height: auto; 
                 min-height: 90vh;
                 padding: 80px 20px;
                 flex-direction: column;
@@ -242,20 +241,25 @@
             }
 
             .main-logo {
-                width: 80%; /* Largura responsiva */
-                max-width: 350px; /* Limite máximo */
+                width: 80%; 
+                max-width: 350px; 
             }
 
+            /* --- CORREÇÃO DO TÍTULO SWAN NO MOBILE --- */
             .glitch-title {
-                font-size: 4.5rem; /* Título menor no mobile */
+                /* Uso clamp para garantir que caiba em telas pequenas mas cresça em tablets */
+                font-size: clamp(3.5rem, 15vw, 6rem); 
+                /* Aumento ligeiro na altura da linha para evitar cortes no efeito glitch */
+                line-height: 1; 
+                margin-top: 10px;
             }
 
-            /* Nav Floater Reset (O mais importante) */
+            /* Nav Floater Reset */
             .nav-floater {
-                position: relative; /* Deixa de flutuar */
+                position: relative; 
                 bottom: auto;
                 right: auto;
-                flex-direction: row; /* Botões lado a lado */
+                flex-direction: row; 
                 justify-content: center;
                 flex-wrap: wrap;
                 width: 100%;
@@ -263,19 +267,19 @@
             }
 
             .btn-img {
-                width: 160px; /* Botões um pouco menores */
+                width: 160px; 
             }
 
             /* Sections Padding Adjustments */
             .ashes-section, .museum, .tokenomics, footer, .coronation {
-                padding: 60px 5%; /* Reduz paddings gigantes */
+                padding: 60px 5%; 
             }
 
             /* Ashes Section Stacking */
             .ashes-section { display: block; }
             .ashes-text { 
                 padding: 30px; 
-                margin-bottom: -30px; /* Menos sobreposição no mobile para leitura */
+                margin-bottom: -30px; 
                 position: relative; 
             }
 
@@ -285,8 +289,8 @@
             /* Tokenomics Cards Full Width */
             .tokenomics { gap: 20px; }
             .prada-card {
-                width: 100%; /* Cartão ocupa toda a largura */
-                max-width: 450px; /* Mas não fica gigante em tablets */
+                width: 100%; 
+                max-width: 450px; 
             }
 
             /* Footer Stacking */
@@ -302,7 +306,7 @@
             }
             
             .social-links a {
-                margin: 0 10px; /* Espaçamento horizontal entre links */
+                margin: 0 10px; 
                 display: inline-block;
             }
         }
